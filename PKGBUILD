@@ -7,10 +7,10 @@ pkgname=packer-combined
 pkgver=20150530_1127
 pkgrel=1
 pkgdesc='Extended bash wrapper for pacman and aur'
-url="http://delilah/hg/packer-combined"
+url="https://bitbucket.org/replabrobin/packer-combined"
 license=('GPL3')
 arch=('any')
-source=("$pkgname::hg+http://delilah/hg/packer-combined")
+source=("$pkgname::hg+https://bitbucket.org/replabrobin/packer")
 sha256sums=('SKIP')
 # most of depends are not needed, they're present only for clarity
 depends=('grep' 'sed' 'bash' 'curl' 'pacman' 'jshon')
