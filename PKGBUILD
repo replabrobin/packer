@@ -4,7 +4,7 @@
 #		Contributor: dumblob <dumblob@gmail.com>
 
 pkgname=packer-combined
-pkgver=20150530_1127
+pkgver=20150530_1233
 pkgrel=1
 pkgdesc='Extended bash wrapper for pacman and aur'
 url="https://bitbucket.org/replabrobin/packer-combined"
