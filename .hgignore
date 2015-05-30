@@ -39,4 +39,4 @@ syntax: regexp
 ^src
 ^pkg
 ^packer-combined$
-^packer-combined-[_0-9]+-any.pkg.tar.xz
+^packer-combined-[_0-9]+-[0-9]+-any.pkg.tar.xz
