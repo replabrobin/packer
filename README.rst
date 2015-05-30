@@ -5,7 +5,7 @@
     
     
     SYNOPSIS
-           pacman <operation> [options] [packages]
+           packer <operation> [options] [packages]
     
     DESCRIPTION
            Packer is a bash wrapper for pacman and the AUR. It was designed to be
