@@ -34,3 +34,9 @@ syntax: glob
 *.scc
 __pycache__
 build
+
+syntax: regexp
+^src
+^pkg
+^packer-combined$
+^packer-combined-[_0-9]+-any.pkg.tar.xz
