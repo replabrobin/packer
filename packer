@@ -87,16 +87,18 @@ usage() {
   echo '      --auronly               - only do actions for aur'
   echo '      --needed                - pass --needed to pacman'
   echo '      --devel                 - update devel packages during -Su'
-  echo '      --skipinteg             - when using makepkg, do not check md5s'
-  echo '      --skippgpcheck          - when using makepkg, do not check pgps'
+  echo '*     --skipinteg             - when using makepkg, do not check md5s'
+  echo '*     --skippgpcheck          - when using makepkg, do not check pgps'
   echo '      --makepkg-log log       - log for makepkg'
-  echo '      --assume-installed pkg=version  - assume pkg is installed'
+  echo '*     --assume-installed pkg=version  - assume pkg is installed'
   echo "      --nodeps                - don't check dependencies"
   echo '      --preview               - edit pkgbuild before sourcing'
-  echo '      --build-only            - just build an aur'
-  echo '      --install-only          - install a previously built aur'
-  echo '      --aurpkg pkg            - only these pkg files will be installed'
+  echo '*     --build-only            - just build an aur'
+  echo '*     --install-only          - install a previously built aur'
+  echo '*     --aurpkg pkg            - only these pkg files will be installed'
   echo '      --help                  - outputs this message'
+  echo ''
+  echo '* is an added feature'
   exit
 }
 
