@@ -24,9 +24,7 @@ makepkgconf='/etc/makepkg.conf'
 usermakepkgconf="$HOME/.makepkg.conf"
 pacmanconf='/etc/pacman.conf'
 
-[ -z "$AUR_DOMAIN" ] && AUR_DOMAIN="aur.archlinux.org"
-AUR4="${AUR_DOMAIN#aur4}"
-[ "${AUR}"  != "${AUR_DOMAIN}" ] && AUR=1 || AUR4=
+AUR_DOMAIN="aur.archlinux.org"
 RPCURL="https://${AUR_DOMAIN}/rpc.php?type"
 PKGURL="https://${AUR_DOMAIN}"
 
@@ -273,12 +271,7 @@ pkglink() {
 # downloads pkgbuild ($1), edits if $2 is set
 pkginfo() {
   if ! [[ -f "$tmpdir/$1.PKGBUILD" ]]; then
-	if [ -z "$AUR4" ]; then
-    	pkgpath=$(pkglink $1)
-    	curl -Lfs "${pkgpath%/*}/PKGBUILD" > "$tmpdir/$1.PKGBUILD"
-	else
-    	curl -Lfs "https://${AUR_DOMAIN}/cgit/aur.git/plain/PKGBUILD?h=$1" > "$tmpdir/$1.PKGBUILD"
-	fi
+    curl -Lfs "https://${AUR_DOMAIN}/cgit/aur.git/plain/PKGBUILD?h=$1" > "$tmpdir/$1.PKGBUILD"
     if [[ $2 ]]; then
       # rename for syntax highlighting
       ln -sf "$tmpdir/$1.PKGBUILD" "$tmpdir/PKGBUILD"
