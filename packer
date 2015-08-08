@@ -24,9 +24,9 @@ makepkgconf='/etc/makepkg.conf'
 usermakepkgconf="$HOME/.makepkg.conf"
 pacmanconf='/etc/pacman.conf'
 
-[ -z "$AUR_DOMAIN" ] && AUR_DOMAIN="aur4.archlinux.org"
+[ -z "$AUR_DOMAIN" ] && AUR_DOMAIN="aur.archlinux.org"
 AUR4="${AUR_DOMAIN#aur4}"
-[ "${AUR4}"  != "${AUR_DOMAIN}" ] && AUR4=1 || AUR4=
+[ "${AUR}"  != "${AUR_DOMAIN}" ] && AUR=1 || AUR4=
 RPCURL="https://${AUR_DOMAIN}/rpc.php?type"
 PKGURL="https://${AUR_DOMAIN}"
 
