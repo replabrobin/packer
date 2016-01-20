@@ -1,20 +1,16 @@
 NAME
 ----
-
 packer package manager utility for pacman repositories and the AUR
-
-
 
 SYNOPSIS
 --------
 
-packer <operation> [options] [packages]
+**packer <operation> [options] [packages]**
 
 
 
 DESCRIPTION
 -----------
-
 Packer is a bash wrapper for pacman and the AUR. It was designed to be
 a simple and very fast replacement for the basic functionality of
 yaourt. It allows you to install, update, search, and show information
@@ -25,114 +21,62 @@ for any package in the main repositories and in the AUR.
 OPERATIONS
 ----------
 
-**R*** | **D*** | **U*** | **Sc***
+**-R*** | **-D*** | **-U*** | **-Sc*** Run pacman as root with given arguments.
 
-Run pacman as root with given arguments.
+**-S** Install a package.
 
-**S**
+**-Sd[d]** Install a package without dependency version checks.
 
-Install a package.
+**-Syu** | **-Su** Sync with repositories.
 
-**Sd[d]**
+**-Ss** | **-Ssq** Search for a package.
 
-Install a package without dependency version checks.
+**-Si** Show information for a package.
 
-**Syu** | **Su**
+**-G** Download and extract AUR package tarballs, but dont install anything.
 
-Sync with repositories.
-
-**Ss** | **Ssq**
-
-Search for a package.
-
-**Si**
-
-Show information for a package.
-
-**G**
-
-Download and extract AUR package tarballs, but dont install anything.
-
-**h** | **help**
-
-Show packer usage.
-
+**-h** | **--help** Show packer usage.
 
 
 OPTIONS
 -------
 
-**force**
+**--force** Bypass file conflict checks.
 
-Bypass file conflict checks.
+**--ignore** <package> Ignore packages. Separate package names with a comma.
 
-**ignore**<package>
+**--noconfirm** Perform commands without confirmation from the user.
 
-Ignore packages. Separate package names with a comma.
-
-**noconfirm**
-
-Perform commands without confirmation from the user.
-
-**noedit**
-
-Perform commands without asking if the user wants to edit any
+**--noedit** Perform commands without asking if the user wants to edit any
 installation files.
 
-**quickcheck**
+**--quickcheck** Check for updates and exit.
 
-Check for updates and exit.
+**--auronly** Only perform commands for the AUR.
 
-**auronly**
+**--needed** Dont reinstall up to date packages.
 
-Only perform commands for the AUR.
+**--devel** Update development packages. (cvs, git...).
 
-**needed**
+**--skipinteg** Skip the integrity check by ignoring AUR package MD5 sums.
 
-Dont reinstall up to date packages.
+**--skippgpcheck** skip makepkg gnu pgp checks.
 
-**devel**
+**--makepkg-log** logfilepath  specify path to makepkg logfile.
 
-Update development packages. (cvs, git...).
+**--assume-installed** pkg=version assume pkg version is installed.
 
-**skipinteg**
+**--nodeps** don't check dependencies.
 
-Skip the integrity check by ignoring AUR package MD5 sums.
-
-**skippgpcheck**
-
-skip makepkg gnu pgp checks.
-
-**makepkg-log** logfilepath.
-
-path to makepkg logfile.
-
-**assume-installed** pkg=version
-
-assume pkg version is installed.
-
-**nodeps**
-
-dont check dependencies.
-
-**preview**
-
-Always offer to edit the pkgbuild before sourcing it. To always force
+**--preview** Always offer to edit the pkgbuild before sourcing it. To always force
 preview,alias packer="packer --preview"
 
-**buildonly**
+**--buildonly** Only build aur packages; useful to just create the binary package.
 
-Only build aur packages; useful to just create the binary package.
+**--installonly** Install an aur package already built with **buildonly**.
 
-**installonly**
-
-Install an aur package already built with **buildonly**.
-
-**aurpkg pkg**
-
-Only install this particular aur package. Can be used with glob
+**--aurpkg pkg** Only install this particular aur package. Can be used with glob
 patterns.
-
 
 
 INTERACTIVE MODE
@@ -147,25 +91,24 @@ package, enter the corresponding number.
 EXAMPLE USAGE
 -------------
 
-Sync and update all packages: packer Syu
+Sync and update all packages: packer -Syu
 
-Update only AUR packages: packer Syuauronly
+Update only AUR packages: packer -Syu --auronly
 
 Update, and reinstall packages that were installed from a revision
-control source: packer Syu devel
+control source: packer -Syu devel
 
 For a package called name :
 
-Search: packer Ss name
+  Search: packer -Ss name
 
-Install: packer S name
+  Install: packer -S name
 
-Install without confirmations: packer Snoconfirm name
+  Install without confirmations: packer -Si --noconfirm name
 
-Get information about a package: packer Si name
+  Get information about a package: packer -Si name
 
-Search and install in interactive mode: packer name
-
+  Search and install in interactive mode: packer name
 
 
 CONFIGURATION
@@ -189,7 +132,7 @@ set then the default path is ~/tmp
 SEE ALSO
 --------
 
-**pacman**(8)
+**pacman** (8)
 
 
 
@@ -199,4 +142,5 @@ AUTHORS
 Matthew Bruenig<matthewbruenig@gmail.com>
 Kyle Keen https://github.com/keenerd/packer
 Gavin Hungry https://github.com/gavinhungry/packer
-Robin Becker
+Robin Becker https://bitbucket.org/replabrobin/
+Семён Марьясин https://bitbucket.org/MarSoftWare/
