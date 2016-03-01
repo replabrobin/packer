@@ -25,7 +25,7 @@ usermakepkgconf="$HOME/.makepkg.conf"
 pacmanconf='/etc/pacman.conf'
 
 AUR_DOMAIN="aur.archlinux.org"
-RPCURL="https://${AUR_DOMAIN}/rpc.php?type"
+RPCURL="https://${AUR_DOMAIN}/rpc.php?v=5&type"
 PKGURL="https://${AUR_DOMAIN}"
 
 if [[ -t 1 && ! $COLOR = "NO" ]]; then
