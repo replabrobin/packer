@@ -265,7 +265,7 @@ rpcinfo() {
 
 pkglink() {
   rpcinfo $1
-  echo "${PKGURL}$(jshon -Q -e results -e URLPath -u < "$tmpdir/$1.info")"
+  echo "${PKGURL}$(jshon -Q -e results -e 0 -e URLPath -u < "$tmpdir/$1.info")"
 }
 
 # downloads pkgbuild ($1), edits if $2 is set
@@ -296,7 +296,8 @@ aurversionisnewer() {
 
 isoutofdate() {
   rpcinfo "$1"
-  [[ "$(jshon -Q -e results -e OutOfDate -u < "$tmpdir/$1.info")" != "0" ]]
+  local ood="$(jshon -Q -e results -e 0 -e OutOfDate -u < "$tmpdir/$1.info")"
+  [[ "${ood}" != "0" && "${ood}" != null ]]
 }
 
 # $1 is prompt, $2 is file
@@ -543,7 +544,7 @@ installhandling() {
 }
 
 run_quick_check() {
-  bigurl="https://${AUR_DOMAIN}/rpc.php?type=multiinfo"
+  bigurl="https://${AUR_DOMAIN}/rpc.php?v=5&type=multiinfo"
   for p in $(pacman -Qqm); do
     bigurl="$bigurl&arg\[\]=$p"
   done
