@@ -286,7 +286,7 @@ aurversionisnewer() {
   rpcinfo "$1"
   unset aurversion
   if existsinaur "$1"; then
-    aurversion="$(jshon -Q -e results -e Version -u < "$tmpdir/$1.info")"
+    aurversion="$(jshon -Q -e results -e 0 -e Version -u < "$tmpdir/$1.info")"
     if [[ "$(LC_ALL=C vercmp "$aurversion" "$2")" -gt 0  ]]; then
       return 0
     fi
