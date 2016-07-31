@@ -107,7 +107,7 @@ usage() {
 runasroot() {
   if [[ $UID -eq 0 ]]; then
     "$@"
-  elif sudo -v &>/dev/null && sudo -l "$@" &>/dev/null; then
+  elif sudo -l "$@" &>/dev/null || sudo -v &>/dev/null; then
     sudo -E "$@"
   else
     echo -n "root "
