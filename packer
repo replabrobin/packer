@@ -594,40 +594,61 @@ packageargs=()
 aurpkgs=()
 while [[ $1 ]]; do
   case "$1" in
-    -R* | -D* | -U* | -Sc*)
+    (-R*)
+      clean_cache=""
+      pkgs=()
+      for a do
+        shift
+        if [ "$a" = "--clean-cache" ]; then
+          clean_cache="1"
+          continue
+        fi
+        set -- "$@" "$a"
+        $PACMAN -Q "$a" &> /dev/null && pkgs+=("$a")
+      done
+      runasroot $PACMAN "$@"
+      xit="$?"
+      if [ -n "$clean_cache" ]; then
+        for a in "${pkgs[@]}"; do
+          [ -n "$a" ] && runasroot rm "/var/cache/pacman/pkg/${a}"*
+        done
+      fi
+      exit "$xit"
+    ;;
+    (-D* | -U* | -Sc*)
       runasroot $PACMAN "$@"
       exit $?
     ;;
-    '-S') option=install ;;
-    '-Sdd' | '-Sd') option=install ; PACOPTS+=("--nodeps"); MAKEPKGOPTS+=("--nodeps");;
-    '-Ss') option=search ;;
-    '-Ssq'|'-Sqs') option=search ; quiet='1' ;;
-    '-Si') option=info ;;
-    -S*u*) option=update ; pacmanarg="$1" ;;
-    '-Sy'|'-Syy') option=reposync; pacmanarg="${1}" ;;
-    '-G') option=download ;;
-    '-h'|'--help') usage ;;
-    '--quiet') quiet='1' ;;
-    '--force'|'-f') force='1'; PACOPTS+=("--force");;
-    '--ignore') ignorearg="$2" ; PACOPTS+=("--ignore" "$2") ; shift ;;
-    '--noconfirm') noconfirm='1' PACOPTS+=("--noconfirm");;
-    '--needed') PACOPTS+=("--needed");;
-    '--assume-installed') PACOPTS+=("--assume-installed" "$2"); shift;;
-    '--nodeps') PACOPTS+=("--nodeps");;
-    '--noedit') noedit='1' ;;
-    '--auronly') auronly='1' ;;
-    '--quickcheck') quickcheck='1' ;;
-    '--devel') devel='1' ;;
-    '--skipinteg') MAKEPKGOPTS+=("--skipinteg") ;;
-    '--skippgpcheck') MAKEPKGOPTS+=("--skippgpcheck") ;;
-    '--makepkg-log') MAKEPKG_LOG=${2}; shift ;;
-    '--preview') preview='1' ;;
-    '--build-only') installAur='' ;;
-    '--install-only') buildAur='' ;;
-    '--aurpkg') aurpkgs+=(${2}); shift;;
-    '--') shift ; packageargs+=("$@") ; break ;;
-    -*) $PACMAN "$@";exit $?;;
-    *) packageargs+=("$1") ;;
+    ('-S') option=install ;;
+    ('-Sdd' | '-Sd') option=install ; PACOPTS+=("--nodeps"); MAKEPKGOPTS+=("--nodeps");;
+    ('-Ss') option=search ;;
+    ('-Ssq'|'-Sqs') option=search ; quiet='1' ;;
+    ('-Si') option=info ;;
+    (-S*u*) option=update ; pacmanarg="$1" ;;
+    ('-Sy'|'-Syy') option=reposync; pacmanarg="${1}" ;;
+    ('-G') option=download ;;
+    ('-h'|'--help') usage ;;
+    ('--quiet') quiet='1' ;;
+    ('--force'|'-f') force='1'; PACOPTS+=("--force");;
+    ('--ignore') ignorearg="$2" ; PACOPTS+=("--ignore" "$2") ; shift ;;
+    ('--noconfirm') noconfirm='1' PACOPTS+=("--noconfirm");;
+    ('--needed') PACOPTS+=("--needed");;
+    ('--assume-installed') PACOPTS+=("--assume-installed" "$2"); shift;;
+    ('--nodeps') PACOPTS+=("--nodeps");;
+    ('--noedit') noedit='1' ;;
+    ('--auronly') auronly='1' ;;
+    ('--quickcheck') quickcheck='1' ;;
+    ('--devel') devel='1' ;;
+    ('--skipinteg') MAKEPKGOPTS+=("--skipinteg") ;;
+    ('--skippgpcheck') MAKEPKGOPTS+=("--skippgpcheck") ;;
+    ('--makepkg-log') MAKEPKG_LOG=${2}; shift ;;
+    ('--preview') preview='1' ;;
+    ('--build-only') installAur='' ;;
+    ('--install-only') buildAur='' ;;
+    ('--aurpkg') aurpkgs+=(${2}); shift;;
+    ('--') shift ; packageargs+=("$@") ; break ;;
+    (-*) $PACMAN "$@";exit $?;;
+    (*) packageargs+=("$1") ;;
   esac
   shift
 done

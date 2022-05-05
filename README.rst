@@ -78,6 +78,8 @@ preview,alias packer="packer --preview"
 **--aurpkg pkg** Only install this particular aur package. Can be used with glob
 patterns.
 
+**--clean-cache** With -R remove cached pkg downloads
+
 
 INTERACTIVE MODE
 ----------------
